@@ -3,7 +3,7 @@ import './App.css';
 import 'bulma/css/bulma.css'
 import {Axios} from './componets/axios'
 
-const URL='https://rickandmortyapi.com/api/character?page=3'
+const URL='https://rickandmortyapi.com/api/character?page=1'
 
 function App() {
   return (

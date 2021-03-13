@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import {PersonajeLista} from './person'
 
 const axios = require('axios').default
 
 export class Axios extends Component{
 
-    constructor(props){
-        super(props)
+    constructor(){
+        super()
         this.state={
             data: [],
             URL : '',
@@ -21,7 +22,8 @@ export class Axios extends Component{
     }
 
     _prev= () => {
-        const {anterior} = this.state
+        const {anterior, URL} = this.state
+        !anterior ? this._consumo(URL):
         this._consumo(anterior)
     }
 
@@ -34,8 +36,6 @@ export class Axios extends Component{
         console.clear()
         axios.get(url)
         .then(response => {
-            console.log(response);
-            console.log(typeof(response))
             const {results, info} = response.data
             console.log(results)
             this.setState({
@@ -58,28 +58,24 @@ export class Axios extends Component{
 
     render(){
         const data = this.state.data
-        const total = this.state.total
         return(
             <div>
-                <h1>Personajes de Rickand Morty</h1>
-                <h2>Total: {total}</h2>
+                <h1 className="title is-1">Personajes de Rick and Morty</h1>
             {
                 !data ? 'Cargando...'
                 : data.map(values => {
                     return (
-                        <div key={values.id}>
-                        <br/>
-                        <h3>Nombre: {values.name}</h3>
-                        <h4>Especie: {values.species}</h4>
-                        <img src={values.image}/>
-                        <br/> <br/>
+                        <div key={values.id} className='Person'>
+                            <PersonajeLista
+                            id={values.id} name={values.name} species={values.species} image={values.image}
+                            />
                         </div>
                         )
                     }
                 )
             }
-            <button className="button" onClick={this._prev}>Anterior</button>
-            <button className="button" onClick={this._next}>Siguiente</button>
+            <button className="button is-dark" onClick={this._prev}>Anterior</button>
+            <button className="button is-dark" onClick={this._next}>Siguiente</button>
             </div>
         )
     }
