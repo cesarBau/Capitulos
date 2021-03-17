@@ -11,10 +11,10 @@ const Axios = (props) => {
     const [siguiente,setSiguiente] = useState('')
 
     useEffect(() => {
-        consumo(URL)
+        consumo()
     },[URL])
 
-     const consumo = async () => {
+    const consumo = async () => {
         console.clear()
         const response = await axios.get(URL)
         const {results, info} = response.data
