@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import {PersonajeLista} from './person'
+import {PersonajeLista} from '../pages/person'
 
 const axios = require('axios');
+const urlCaracter='https://rickandmortyapi.com/api/character?page=1'
 
-const Axios = (props) => {
+const Axios = () => {
 
     const [data,setData] = useState([])
-    const [URL,setURL] = useState(props.url)
+    const [URL,setURL] = useState(urlCaracter)
     const [anterior,setAnterior] = useState('')
     const [siguiente,setSiguiente] = useState('')
 
@@ -34,7 +35,7 @@ const Axios = (props) => {
                 return (
                     <div key={values.id} className='Person'>
                         <PersonajeLista
-                            id={values.id} name={values.name} species={values.species} image={values.image}
+                            id={values.id} name={values.name} image={values.image}
                         />
                     </div>
                     )
